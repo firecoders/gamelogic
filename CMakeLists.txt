@@ -1,5 +1,6 @@
 cmake_minimum_required ( VERSION 2.6 )
 project ( GAMELOGIC )
+include ( ExternalProject )
 
 # Output compiled files in root directory
 set ( LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/.. )
@@ -17,6 +18,19 @@ endif ( CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANG )
 # Add compiler options
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall" )
 set ( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O1" )
+
+# Store external dependencies in build/external/
+set ( EXTERNALS_PREFIX ${PROJECT_BINARY_DIR}/external )
+set ( EXTERNALS_CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNALS_PREFIX} )
+
+# Add the evensystem
+ExternalProject_Add ( EVENTSYSTEM
+    PREFIX ${EXTERNALS_PREFIX}
+    URL https://github.com/firecoders/eventsystem/archive/v0.2.0.tar.gz
+    URL_HASH SHA256=aca062dfc5b2ae12084af3840e46b4885687b32b8ec2c653627fa392ae8b925c
+    DOWNLOAD_NAME eventsystem-v0.2.0.tar.gz
+    CMAKE_ARGS ${EXTERNALS_CMAKE_ARGS}
+)
 
 # Include headers from inc
 include_directories ( ${CMAKE_SOURCE_DIR}/inc )
