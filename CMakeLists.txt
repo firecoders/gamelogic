@@ -32,12 +32,16 @@ ExternalProject_Add ( EVENTSYSTEM
     CMAKE_ARGS ${EXTERNALS_CMAKE_ARGS}
 )
 
-# Include headers from inc
+# Add the source directories
 include_directories ( ${CMAKE_SOURCE_DIR}/inc )
-
-# Add the two subdirectories
 add_subdirectory ( ${CMAKE_SOURCE_DIR}/src )
-add_subdirectory ( ${CMAKE_SOURCE_DIR}/tests )
+
+set ( COMPILE_TESTS OFF CACHE COMPILE_TESTS "Compile test_executable" )
+
+# Add the tests subdirectory
+if ( COMPILE_TESTS )
+    add_subdirectory ( ${CMAKE_SOURCE_DIR}/tests )
+endif ( COMPILE_TESTS )
 
 file ( GLOB_RECURSE GAMELOGIC_HEADERS ${CMAKE_SOURCE_DIR}/inc *.(h|hpp) )
 install ( FILES ${GAMELOGIC_HEADERS} DESTINATION include )
