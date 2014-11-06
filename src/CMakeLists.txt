@@ -5,6 +5,3 @@ file ( GLOB_RECURSE GAMELOGIC_LIBRARY_SRC ${CMAKE_SOURCE_DIR} *.cpp )
 add_library ( gamelogic ${GAMELOGIC_LIBRARY_SRC} )
 add_custom_target ( libgamelogic.a DEPENDS gamelogic )
 install ( TARGETS gamelogic ARCHIVE DESTINATION lib )
-
-# Use eventsystem for libgamelogic.a
-include_directories ( ${EXTERNALS_PREFIX}/src/EVENTSYSTEM/inc )
