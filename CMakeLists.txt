@@ -23,15 +23,6 @@ set ( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O1" )
 set ( EXTERNALS_PREFIX ${PROJECT_BINARY_DIR}/external CACHE FILEPATH "Installation Path" )
 set ( EXTERNALS_CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNALS_PREFIX} )
 
-# Add the evensystem
-ExternalProject_Add ( EVENTSYSTEM
-    PREFIX ${EXTERNALS_PREFIX}
-    URL https://github.com/firecoders/eventsystem/archive/v0.2.0.tar.gz
-    URL_HASH SHA256=aca062dfc5b2ae12084af3840e46b4885687b32b8ec2c653627fa392ae8b925c
-    DOWNLOAD_NAME eventsystem-v0.2.0.tar.gz
-    CMAKE_ARGS ${EXTERNALS_CMAKE_ARGS}
-)
-
 # Add the source directories
 include_directories ( ${CMAKE_SOURCE_DIR}/inc )
 add_subdirectory ( ${CMAKE_SOURCE_DIR}/src )
